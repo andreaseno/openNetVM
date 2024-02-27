@@ -812,7 +812,7 @@ class _CppLintState(object):
       if clean_filt:
         self.filters.append(clean_filt)
     for filt in self.filters:
-      if not (filt.startswith('+') or filt.startswith('-')):
+      if not filt.startswith(('+', '-')):
         raise ValueError('Every filter in --filters must start with + or -'
                          ' (%s does not)' % filt)
 
@@ -1775,7 +1775,7 @@ def CheckHeaderFileIncluded(filename, include_state, error):
   """Logs an error if a .cc file does not include its header."""
 
   # Do not check test files
-  if filename.endswith('_test.cc') or filename.endswith('_unittest.cc'):
+  if filename.endswith(('_test.cc', '_unittest.cc')):
     return
 
   fileinfo = FileInfo(filename)
@@ -4534,8 +4534,7 @@ def _IsTestFilename(filename):
   Returns:
     True if 'filename' looks like a test, False otherwise.
   """
-  if (filename.endswith('_test.cc') or
-      filename.endswith('_unittest.cc') or
+  if (filename.endswith(('_test.cc', '_unittest.cc')) or
       filename.endswith('_regtest.cc')):
     return True
   else:
