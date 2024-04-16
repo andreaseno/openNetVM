@@ -500,7 +500,7 @@ _line_length = 120
 
 # The allowed extensions for file names
 # This is set by --extensions flag.
-_valid_extensions = set(['c', 'cc', 'h', 'cpp', 'cu', 'cuh'])
+_valid_extensions = {'c', 'cc', 'h', 'cpp', 'cu', 'cuh'}
 
 def ParseNolintSuppressions(filename, raw_line, linenum, error):
   """Updates the global list of error-suppressions.
