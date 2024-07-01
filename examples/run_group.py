@@ -47,6 +47,7 @@ import time
 from signal import signal, SIGINT
 from subprocess import Popen
 from datetime import datetime
+from security import safe_command
 
 def handler(signal_received, frame):
     """Handles cleanup on user shutdown"""
@@ -206,7 +207,7 @@ if __name__ == '__main__':
                 " Check syntax in your configuration file" % (nf))
             sys.exit(1)
         try:
-            p = Popen(shlex.split(cmd), stdout=(log_files[i]), stderr=log_files[i], \
+            p = safe_command.run(Popen, shlex.split(cmd), stdout=(log_files[i]), stderr=log_files[i], \
                 universal_newlines=True)
             procs_list.append(p)
             print("Starting %s %s" % (nf, cmd), flush=True)
